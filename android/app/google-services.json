@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "555262222254",
+    "project_id": "music-and-stemz",
+    "storage_bucket": "music-and-stemz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555262222254:android:ae83e2d6861475da70323f",
+        "android_client_info": {
+          "package_name": "com.stems.audio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6Bj7J8Bk2rTChGpFBJIT3_GIHzWKfBNM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

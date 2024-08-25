@@ -1,0 +1,44 @@
+{
+  "name": "audit",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.24.0",
+    "@react-native-community/slider": "^4.5.2",
+    "@react-native-firebase/app": "^20.3.0",
+    "@react-native-firebase/auth": "^20.3.0",
+    "@react-native-firebase/firestore": "^20.4.0",
+    "@react-navigation/native": "^6.1.18",
+    "@react-navigation/native-stack": "^6.11.0",
+    "@reduxjs/toolkit": "^2.2.7",
+    "@types/react": "^18.3.3",
+    "expo": "~51.0.25",
+    "expo-av": "^14.0.6",
+    "expo-file-system": "^17.0.1",
+    "expo-music-library": "^1.0.0",
+    "expo-splash-screen": "^0.27.5",
+    "expo-status-bar": "~1.12.1",
+    "react": "18.2.0",
+    "react-native": "0.74.5",
+    "react-native-blob-util": "^0.19.11",
+    "react-native-config": "^1.5.3",
+    "react-native-pager-view": "^6.3.3",
+    "react-native-safe-area-context": "^4.10.8",
+    "react-native-screens": "^3.34.0",
+    "react-native-svg": "^15.6.0",
+    "react-native-tab-view": "^3.5.2",
+    "react-redux": "^9.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "typescript": "^5.5.4"
+  },
+  "private": true,
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}
