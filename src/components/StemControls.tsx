@@ -12,6 +12,8 @@ import { Audio } from "expo-av";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "@/theme/colors";
 import { BASE_API_URL } from "@/data/constants";
+import * as FileSystem from "expo-file-system";
+import auth from "@react-native-firebase/auth";
 
 const formatTime = (millis: number): string => {
   const minutes = Math.floor(millis / 60000);
@@ -48,7 +50,12 @@ const StemControls: React.FC<StemControlsProps> = ({ stemUrls, onClose }) => {
         const sounds = await Promise.all(
           Object.values(stemUrls).map(async (url) => {
             const { sound } = await Audio.Sound.createAsync(
-              { uri: `${BASE_API_URL}/${url}` },
+              {
+                uri: `${BASE_API_URL}/${url}`,
+                headers: {
+                  Authorization: await auth().currentUser.getIdToken(),
+                },
+              },
               {
                 volume: 1.0,
                 shouldPlay: false,
@@ -177,6 +184,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
+  },
+  downloadButton: {
+    marginTop: 20,
+    padding: 10,
+    backgroundColor: colors.primary,
+    borderRadius: 5,
+    alignItems: "center",
+  },
+  downloadText: {
+    color: colors.white,
+    fontWeight: "bold",
   },
   playButton: {
     alignItems: "center",

@@ -5,19 +5,22 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Screen from "@/components/Screen";
 import AppText from "@/components/AppText";
 import Card from "@/components/Card";
 import { categories } from "@/data/categories";
 import AppHeader from "@/components/AppHeader";
 import { colors } from "@/theme/colors";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import Input from "@/components/Input";
 import { useDispatch } from "react-redux";
 import { setPlaylists } from "@/features/storage/storageSlice";
 import { useAppSelector } from "@/app/hooks";
 import { MaterialCommunityIcons } from "@/components/Icons";
+import auth from "@react-native-firebase/auth";
+import firestore from "@react-native-firebase/firestore";
+import messaging from "@react-native-firebase/messaging";
 
 const HomeScreen = () => {
   const [showModal, setShowModal] = useState(false);
@@ -25,6 +28,32 @@ const HomeScreen = () => {
   const playlists = useAppSelector((state) => state.storage.playlists);
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  useFocusEffect(
+    useCallback(() => {
+      if (auth().currentUser) {
+        messaging()
+          .getToken()
+          .then((fcmToken: string) => {
+            updateUserToken(fcmToken);
+          });
+        messaging().onTokenRefresh((fcmToken) => {
+          updateUserToken(fcmToken);
+        });
+      }
+    }, [auth().currentUser])
+  );
+
+  const updateUserToken = async (fcmToken: string) => {
+    try {
+      await firestore().collection("users").doc(auth().currentUser.uid).update({
+        fcmToken,
+        emailVerified: true,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleCategoriesPress = (screenName) => {
     navigation.navigate(screenName);

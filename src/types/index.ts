@@ -44,3 +44,12 @@ export type Category = {
   title: string;
   screenName: string;
 };
+
+export type Task = {
+  taskId: string;
+  audioId: string;
+};
+
+export type TasksStateType = {
+  currentTasks: Task[];
+};

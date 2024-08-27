@@ -3,7 +3,8 @@ import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from "expo-av";
 import { Provider } from "react-redux";
 import Main from "./src/Main";
 import * as MusicLibrary from "expo-music-library";
-import { store } from "./src/app/store";
+import { persistor, store } from "./src/app/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 async function configureAudioSession() {
   await Audio.setAudioModeAsync({
@@ -40,7 +41,9 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <Main />
+      <PersistGate persistor={persistor}>
+        <Main />
+      </PersistGate>
     </Provider>
   );
 }

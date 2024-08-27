@@ -3,6 +3,7 @@ import { View, TextInput, StyleSheet, Alert } from "react-native";
 import auth from "@react-native-firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import AppButton from "@/components/AppButton";
+import firestore from "@react-native-firebase/firestore";
 import { colors } from "@/theme/colors";
 
 const RegisterScreen = () => {
@@ -21,6 +22,11 @@ const RegisterScreen = () => {
       const user = userCredential.user;
       setUser(user);
       await user.sendEmailVerification();
+
+      await firestore().collection("users").doc(user.uid).set({
+        email,
+        emailValidated: false,
+      });
 
       Alert.alert(
         "Registration successful",

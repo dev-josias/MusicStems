@@ -5,6 +5,7 @@ import {
   View,
   Alert,
   ScrollView,
+  Text,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -32,6 +33,7 @@ import StemActions from "@/components/PlayerScreen/StemActions";
 import LoadingIndicator from "@/components/PlayerScreen/LoadingIndicator";
 import PlayerControls from "@/components/PlayerScreen/PlayerControls";
 import SongProgressSlider from "@/components/PlayerScreen/SongProgressSlider";
+import { setCurrentTasks } from "@/features/tasks/tasksSlices";
 
 const PlayerScreen = ({ route }) => {
   const { id, uri, artwork, artist, title, duration } = route.params;
@@ -43,6 +45,7 @@ const PlayerScreen = ({ route }) => {
   const [loading, setLoading] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [taskError, setTaskError] = useState("");
 
   const dispatch = useAppDispatch();
   const navigation = useNavigation();
@@ -57,6 +60,8 @@ const PlayerScreen = ({ route }) => {
   );
   const mostPlayed = useAppSelector((state) => state.storage.mostPlayed);
 
+  const currentTasks = useAppSelector((state) => state.tasks.currentTasks);
+
   const { currentSong, setCurrentSong, togglePlay, skipNext } = useAudioPlayer({
     id,
     uri,
@@ -70,7 +75,18 @@ const PlayerScreen = ({ route }) => {
     updateMostPlayed();
     updateRecentlyPlayed();
     checkIfAudioWasAlreadyProcessed();
+    checkIfAudioIsProcessing();
   }, [currentSong]);
+
+  const checkIfAudioIsProcessing = () => {
+    const currentTaskIndex = currentTasks.findIndex(
+      (task) => task.audioId === currentSong.id
+    );
+    if (currentTaskIndex !== -1) {
+      setTaskId(currentTasks[currentTaskIndex].taskId);
+      setProcessing(true);
+    }
+  };
 
   const updateRecentlyPlayed = useCallback(() => {
     const updatedRecentlyPlayed = [
@@ -125,8 +141,8 @@ const PlayerScreen = ({ route }) => {
       updatedFavorites.splice(index, 1);
     } else {
       updatedFavorites.unshift(currentSong);
+      dispatch(setFavorites(updatedFavorites));
     }
-    dispatch(setFavorites(updatedFavorites));
   };
 
   const checkIfAudioWasAlreadyProcessed = async () => {
@@ -175,6 +191,9 @@ const PlayerScreen = ({ route }) => {
       navigation.navigate("Login");
       return;
     }
+    if (taskError) {
+      setTaskError("");
+    }
     setLoading(true);
     try {
       const response = await RNBlobUtil.fetch(
@@ -202,16 +221,29 @@ const PlayerScreen = ({ route }) => {
       } else if (responseData.task_id) {
         setProcessing(true);
         setTaskId(responseData.task_id);
+        dispatch(
+          setCurrentTasks([
+            ...currentTasks,
+            { taskId: responseData.task_id, audioId: currentSong.id },
+          ])
+        );
       } else if (responseData.error) {
         Alert.alert("Error", responseData.error);
       } else {
         Alert.alert("Error", "Something went wrong");
       }
     } catch (error) {
+      setTaskError(error.message);
       console.error(error);
     } finally {
       setLoading(false);
     }
+  };
+
+  const removeTask = (taskId: string) => {
+    dispatch(
+      setCurrentTasks(currentTasks.filter((task) => task.taskId !== taskId))
+    );
   };
 
   return (
@@ -261,14 +293,21 @@ const PlayerScreen = ({ route }) => {
           audioState={audioState}
           toggleLoop={toggleLoop}
         />
-        {loading && <LoadingIndicator />}
+        {loading && !taskId && <LoadingIndicator />}
         {processing && taskId ? (
           <TaskProgress
             taskId={taskId}
             onComplete={(result) => {
               setStemUrls(result);
               setProcessing(false);
+              removeTask(taskId);
               setTaskId(null);
+            }}
+            onError={(message: string) => {
+              setProcessing(false);
+              removeTask(taskId);
+              setTaskId(null);
+              setTaskError(message);
             }}
           />
         ) : (
@@ -284,6 +323,7 @@ const PlayerScreen = ({ route }) => {
             />
           )
         )}
+        {taskError && <Text style={styles.error}>{taskError}</Text>}
         {modalVisible && stemUrls && (
           <StemControls
             stemUrls={stemUrls}
@@ -326,5 +366,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "normal",
     color: colors.white,
+  },
+  error: {
+    color: colors.danger,
+    textAlign: "center",
+    marginVertical: 10,
   },
 });
