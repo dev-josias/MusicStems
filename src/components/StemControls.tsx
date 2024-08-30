@@ -6,6 +6,7 @@ import {
   Alert,
   TouchableOpacity,
   Modal,
+  ActivityIndicator,
 } from "react-native";
 import Slider from "@react-native-community/slider";
 import { Audio } from "expo-av";
@@ -14,6 +15,7 @@ import { colors } from "@/theme/colors";
 import { BASE_API_URL } from "@/data/constants";
 import * as FileSystem from "expo-file-system";
 import auth from "@react-native-firebase/auth";
+import notifee, { AndroidImportance } from "@notifee/react-native";
 
 const formatTime = (millis: number): string => {
   const minutes = Math.floor(millis / 60000);
@@ -43,12 +45,13 @@ const StemControls: React.FC<StemControlsProps> = ({ stemUrls, onClose }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
     const loadSounds = async () => {
       try {
         const sounds = await Promise.all(
-          Object.values(stemUrls).map(async (url) => {
+          Object.values(stemUrls).map(async (url, index) => {
             const { sound } = await Audio.Sound.createAsync(
               {
                 uri: `${BASE_API_URL}/${url}`,
@@ -57,7 +60,8 @@ const StemControls: React.FC<StemControlsProps> = ({ stemUrls, onClose }) => {
                 },
               },
               {
-                volume: 1.0,
+                volume:
+                  volumes[Object.keys(stemUrls)[index] as keyof typeof volumes],
                 shouldPlay: false,
                 isLooping: true, // Loop the sound for continuous playback
               }

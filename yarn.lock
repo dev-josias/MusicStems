@@ -3640,11 +3640,6 @@ expo-music-library@^1.0.0:
   resolved "https://registry.yarnpkg.com/expo-music-library/-/expo-music-library-1.0.0.tgz#174a730aa1e4558d6a45f710a75bf1867d703619"
   integrity sha512-Wr76h7Socl9mSUgDuCHm0c7NjGT4mkgI5amw/G1xt8GNg7oTn/Gh8i/dmEJf15ZBTA1J4XajNlcatn6pdXCB0g==
 
-expo-permissions@^14.4.0:
-  version "14.4.0"
-  resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-14.4.0.tgz#d7bb2f0026b87e1294ee551969c35306193f4ad3"
-  integrity sha512-oAcnJ7dlZhpBydK73cwomA2xofizayVUz+FW5REl7dMu7MYyeN/3aqhlpZ3mYddrxvG161bqu97MQr01UixUnw==
-
 expo-splash-screen@^0.27.5:
   version "0.27.5"
   resolved "https://registry.yarnpkg.com/expo-splash-screen/-/expo-splash-screen-0.27.5.tgz#bcc1ebb4e761e19a1f2112469f3d424a36fb1e2c"
