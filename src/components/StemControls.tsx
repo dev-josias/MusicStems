@@ -106,7 +106,6 @@ const StemControls: React.FC<StemControlsProps> = ({ stemUrls, onClose }) => {
 
   const togglePlayPause = async () => {
     if (isPlaying) {
-      // Pause all stems
       await Promise.all(soundObjects.map((sound) => sound.pauseAsync()));
     } else {
       await Promise.all(soundObjects.map((sound) => sound.playAsync()));
