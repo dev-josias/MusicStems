@@ -1,4 +1,4 @@
-import { StyleSheet, View, ViewStyle } from "react-native";
+import { SafeAreaView, StyleSheet, View, ViewStyle } from "react-native";
 import React, { ReactNode } from "react";
 import { colors } from "@/theme/colors";
 
@@ -9,7 +9,11 @@ const Screen = ({
   children: ReactNode;
   customStyles?: ViewStyle;
 }) => {
-  return <View style={[styles.container, customStyles]}>{children}</View>;
+  return (
+    <SafeAreaView style={[styles.container, customStyles]}>
+      {children}
+    </SafeAreaView>
+  );
 };
 
 export default Screen;

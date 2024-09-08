@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, View, useWindowDimensions } from "react-native";
+import { Platform, StyleSheet, useWindowDimensions } from "react-native";
 import React, { useState } from "react";
 import { SceneMap, TabView, TabBar } from "react-native-tab-view";
 

@@ -7,14 +7,15 @@ import { useNavigation } from "@react-navigation/native";
 
 const Genre = ({ id, title }: { id: string; title: string }) => {
   const navigation = useNavigation();
-  const gotToAlbumsSongs = () => {
+
+  const goToGenresSongs = () => {
     navigation.navigate("SongsList", {
       genreId: id,
       title: `Genres - ${title}`,
     });
   };
   return (
-    <TouchableOpacity style={styles.container} onPress={gotToAlbumsSongs}>
+    <TouchableOpacity style={styles.container} onPress={goToGenresSongs}>
       <View style={styles.innerContent}>
         <MaterialCommunityIcons
           name="music-box"

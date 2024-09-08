@@ -3612,11 +3612,6 @@ expo-keep-awake@~13.0.2:
   resolved "https://registry.yarnpkg.com/expo-keep-awake/-/expo-keep-awake-13.0.2.tgz#5ef31311a339671eec9921b934fdd90ab9652b0e"
   integrity sha512-kKiwkVg/bY0AJ5q1Pxnm/GvpeB6hbNJhcFsoOWDh2NlpibhCLaHL826KHUM+WsnJRbVRxJ+K9vbPRHEMvFpVyw==
 
-expo-media-library@~16.0.4:
-  version "16.0.4"
-  resolved "https://registry.yarnpkg.com/expo-media-library/-/expo-media-library-16.0.4.tgz#d6b264a201861a2eb055b8c181368d2e7f525ca4"
-  integrity sha512-nX9iN8+XAoERDVGPpDdUbhFwvfYdBpkgTAxwDOYL7heASYCOdxfqQtXy/jv1+QZpj0epaR6Owq/LUn1lVP3ykg==
-
 expo-modules-autolinking@1.11.1:
   version "1.11.1"
   resolved "https://registry.yarnpkg.com/expo-modules-autolinking/-/expo-modules-autolinking-1.11.1.tgz#4a867f727d9dfde07de8dde14b333a3cbf82ce3c"
@@ -3635,10 +3630,10 @@ expo-modules-core@1.12.20:
   dependencies:
     invariant "^2.2.4"
 
-expo-music-library@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/expo-music-library/-/expo-music-library-1.1.2.tgz#c0c155be7bf617a665f044c96cc97cbcf3cbe30a"
-  integrity sha512-y4yvq+nTzXatZjX5cRpBfF4kyt0StebP9pzhjVlIHOFvdyyLJIT2ebHQhrfCUJLkShYmt2/zjIjvRL67u7/BRQ==
+expo-music-library@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/expo-music-library/-/expo-music-library-1.1.6.tgz#a6ccdd77ab31ae8443733e65639227abff8ac653"
+  integrity sha512-xaX5EJbk5WPHIS8/+CAhg6wD891jST38+KOrM/gzPDTbSVoUzSD5W2MrfhSmSDXFwe5n808lo1BoT7ZTLsQdKg==
 
 expo-splash-screen@^0.27.5:
   version "0.27.5"

@@ -24,14 +24,20 @@ const useMusicLibrary = (sortBy?: MusicLibrary.SortByValue) => {
   }, [assets]);
 
   const getAudios = async () => {
-    const results = await MusicLibrary.getAssetsAsync({
-      first: 20,
-      mediaType: MusicLibrary.MediaType.audio,
-      sortBy: sortBy || MusicLibrary.SortBy.default,
-    });
+    try {
+      const results = await MusicLibrary.getAssetsAsync({
+        first: 20,
+        mediaType: MusicLibrary.MediaType.audio,
+        sortBy: sortBy || MusicLibrary.SortBy.default,
+      });
 
-    dispatch(setAssets(results.assets));
-    setLastMusicAsset(results.endCursor);
+      console.log(results);
+
+      dispatch(setAssets(results.assets));
+      setLastMusicAsset(results.endCursor);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const loadMore = async () => {
