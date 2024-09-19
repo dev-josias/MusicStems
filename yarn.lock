@@ -3630,10 +3630,10 @@ expo-modules-core@1.12.20:
   dependencies:
     invariant "^2.2.4"
 
-expo-music-library@^1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/expo-music-library/-/expo-music-library-1.1.6.tgz#a6ccdd77ab31ae8443733e65639227abff8ac653"
-  integrity sha512-xaX5EJbk5WPHIS8/+CAhg6wD891jST38+KOrM/gzPDTbSVoUzSD5W2MrfhSmSDXFwe5n808lo1BoT7ZTLsQdKg==
+expo-music-library@^1.1.8:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/expo-music-library/-/expo-music-library-1.1.8.tgz#968d9576c929af420071cfa75bab0e292e684546"
+  integrity sha512-pCzBEJcJv+Eg6DSim5aq0gUvPfHbDrhPbuljR8q8vf0BsfnDGuOh6R1n8IBamLHb7mnPh7p5d6VnMBf++zmU1A==
 
 expo-splash-screen@^0.27.5:
   version "0.27.5"

@@ -27,7 +27,6 @@ const useMusicLibrary = (sortBy?: MusicLibrary.SortByValue) => {
     try {
       const results = await MusicLibrary.getAssetsAsync({
         first: 20,
-        mediaType: MusicLibrary.MediaType.audio,
         sortBy: sortBy || MusicLibrary.SortBy.default,
       });
 
@@ -44,7 +43,6 @@ const useMusicLibrary = (sortBy?: MusicLibrary.SortByValue) => {
     setIsLoadingMore(true);
     const results = await MusicLibrary.getAssetsAsync({
       first: 20,
-      mediaType: MusicLibrary.MediaType.audio,
       sortBy: sortBy || MusicLibrary.SortBy.default,
       after: lastMusicAsset,
     });
@@ -59,7 +57,6 @@ const useMusicLibrary = (sortBy?: MusicLibrary.SortByValue) => {
     setSearchQuery(query);
     if (query !== "") {
       const results = await MusicLibrary.getAssetsAsync({
-        mediaType: MusicLibrary.MediaType.audio,
         sortBy: sortBy || MusicLibrary.SortBy.default,
       });
       setFilteredAssets(
@@ -78,7 +75,6 @@ const useMusicLibrary = (sortBy?: MusicLibrary.SortByValue) => {
     setIsLoadingMore(true);
     const results = await MusicLibrary.getAssetsAsync({
       after: lastMusicAsset,
-      mediaType: MusicLibrary.MediaType.audio,
       sortBy: sortBy || MusicLibrary.SortBy.default,
     });
 
