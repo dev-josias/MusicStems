@@ -30,8 +30,6 @@ const useMusicLibrary = (sortBy?: MusicLibrary.SortByValue) => {
         sortBy: sortBy || MusicLibrary.SortBy.default,
       });
 
-      console.log(results);
-
       dispatch(setAssets(results.assets));
       setLastMusicAsset(results.endCursor);
     } catch (error) {

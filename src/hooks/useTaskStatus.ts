@@ -7,13 +7,13 @@ type TaskState = "PENDING" | "STARTED" | "SUCCESS" | "FAILURE" | "PROGRESS";
 interface TaskStatusResponse {
   state: TaskState;
   progress: number;
-  result?: any; // Adjust the type based on your actual result type
+  result?: any;
 }
 
 const useTaskStatus = (taskId: string) => {
   const [status, setStatus] = useState<TaskState>("PENDING");
   const [progress, setProgress] = useState<number>(0);
-  const [result, setResult] = useState<any>(null); // Add a state for the task result
+  const [result, setResult] = useState<any>(null);
 
   useEffect(() => {
     const intervalId = setInterval(async () => {
