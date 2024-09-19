@@ -1,5 +1,5 @@
 export const colors = {
-  primary: "#37474F", // Slate Grey for primary accents
+  primary: "#2b384c", // Slate Grey for primary accents
   secondary: "#fff", // Soft Amber for secondary accents
   accent: "#607D8B", // Muted Blue-Grey for highlights
   background: "#ECEFF1", // Very Light Grey for main backgrounds
